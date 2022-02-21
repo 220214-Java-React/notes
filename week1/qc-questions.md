@@ -1,4 +1,4 @@
-# QC Questions that may be asked on Monday
+# QC Questions that may be asked on Tuesday
 
 ## Java Basics
 * What is Java? / Why Java?
