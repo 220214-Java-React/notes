@@ -83,3 +83,37 @@ ArrayList<String> list2 = new ArrayList<>();
 ```java
 public class Hello {}
 ```
+## Exceptions
+* What is the difference between `final`, `.finalize()`, and `finally`?
+  * `final`: final keyword can be used for class, method and variables. A final class cannot be subclassed and it prevents other programmers from subclassing a secure class to invoke insecure methods. A final method can't be overridden. A final variable can't change from its initialized value.
+  * `finalize()`: finalize method is used just before an object is destroyed and called just prior to garbage collection.
+  * `finally`: finally, a key word used in exception handling, creates a block of code that will be executed after a `try/catch` block has completed and before the code following the `try/catch` block. The `finally` block will execute whether or not an exception is thrown. For example, if a method opens a file upon exit, then you will not want the code that closes the file to be bypassed by the exception-handling mechanism. This finally keyword is designed to address this contingency.
+* `throw` vs `throws` vs `Throwable`?
+  * `Throwable` - the root interface of exceptions, allow a class to be "thrown"
+  * `throws` - keyword in method signature after params that declare which exception the method might throw
+  * `throw` - the keyword that will actually "throw" an exception in code
+* What is try-with-resources? What interface must the resource implement to use this feature?
+  * Try-with-resources allows for automatically closing resources in a try/catch block using `try(resource) {...}` syntax. Must implement the `AutoCloseable` interface
+* Do you need a catch block? Can have more than 1? Order of them?
+  * Catch block is not necessary - try/finally will compile. You can have more than one catch block, but the order must be from most narrow exception to most broad/general.
+* What is base class of all exceptions? What interface do they all implement?
+  * The base class is `Exception`, which implements the `Throwable` interface
+* List some checked and unchecked exceptions?
+  * Checked - `IOException`, `ClassNotFoundException`, `InterruptedException`
+  * Unchecked - `ArithmeticException`, `ClassCastException`, `IndexOutOfBoundsException`, `NullPointerException`
+* Multi-catch block - can you catch more than one exception in a single catch block?
+  * Yes, use the `|` operator
+* Is this an example of a checked or unchecked exception?
+```java
+public class MyException extends RuntimeException {}
+```
+
+## JUnit
+* What is JUnit?
+  * A Java unit testing framework for testing code - use it for TDD
+* What is TDD?
+  * Test-driven development - write unit tests before application code, then write code to make tests pass. Repeat this process until functionality is complete.
+* What are the annotations in JUnit? Order of execution?
+  * BeforeClass, AfterClass, Before, After, Test, Ignore
+* Give an example of a test case?
+  * Adding two numbers, check that the method returns the sum
