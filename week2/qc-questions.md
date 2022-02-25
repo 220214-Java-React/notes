@@ -1,3 +1,4 @@
+## Java Continued
 * What is the root class from which every class extends?
   * The `Object` class
 * Where are Strings stored?
@@ -117,3 +118,232 @@ public class MyException extends RuntimeException {}
   * BeforeClass, AfterClass, Before, After, Test, Ignore
 * Give an example of a test case?
   * Adding two numbers, check that the method returns the sum
+
+
+## PRACTICALS
+From easiest to hardest:
+
+* Read and predict the following code
+* If I wanted to add another number to my list of favorite numbers, what should I do?
+
+```java
+int[] favoriteNumbers = {3, 7, 42};
+favoriteNumbers[1] = 12;
+System.out.println(favoriteNumbers[0]);
+System.out.println(favoriteNumbers[1]);
+System.out.println(favoriteNumbers[2]);
+```
+
+* Explain the code and predict the output
+```java
+String[] words = {"hello", "goodbye", "car", "motorcycle"};
+int[] nums = new int[words.length];
+int x = 0;
+while (x < words.length) {
+  nums[x] = words[x].length;
+}
+System.out.println(nums[2]);
+```
+
+* Predict the output
+  * TESTS: String vs StringBuilder; String immutability
+  * 1 prints "foo"; 2 prints "foobar"; 3 prints false; 4 prints true
+
+```java
+String str = "foo";
+str.concat("bar");
+
+StringBuilder sb = new StringBuilder("foo");
+sb.append("bar");
+
+System.out.println(str); // ?
+System.out.println(sb);  // ?
+```
+
+* Which variable in the following code can be marked as final?
+
+```java
+public class Counter {
+  private static String MESSAGE = "counting...";
+  private int count = 0;
+
+  public void increment() {
+    while (count < 10) {
+      count++;
+      System.out.println(MESSAGE);
+    }
+  }
+
+  public void decrement() {
+    while (count > 0) {
+      count--;
+      System.out.println(MESSAGE);
+    }
+  }
+}
+```
+
+* Which, if any, lines are valid/invalid?
+  * TESTS: STATIC KEYWORD
+  * Ans: line B is NOT allowed (compilation error). Instance variables cannot be accessed from `static` context
+
+```java
+public class Example {
+  public static int x = 1;
+  public int y = 1;
+
+  public static void incrementStatic() {
+    x++;
+  }
+
+  public void incrementInstance() {
+    y++;
+  }
+
+  public static void printBothStatic() {
+    System.out.println(x);  // A
+    System.out.println(y);  // B
+  }
+
+  public void printBothInstance() {
+    System.out.println(x);  // C
+    System.out.println(y);  // D
+  }
+}
+```
+
+* Using the class above, predict the output
+
+```java
+Example e1 = new Example();
+Example e2 = new Example();
+e1.incrementInstance();
+e2.incrementInstance();
+e2.incrementInstance();
+Example.incrementStatic();
+Example.incrementStatic();
+System.out.println(e1.y);
+System.out.println(e2.y);
+System.out.println(Example.x);
+```
+
+* What is the output of this code? Does it do what we expect? If not, how would you change it?
+  * TESTS: STRING, STRINGBUILDER
+  * Ans: prints out the starting string instead of building a new string. Refactor: reassign to "toBuild" variable or use StringBuilder (more efficient)
+
+```java
+public void buildString(String start, String add) {
+  String toBuild = start;
+  for(int i=0; i < 100; i++) {
+    toBuild.concat(add);
+  }
+  System.out.println(toBuild);
+}
+```
+
+* How many objects are created? What is the output?
+  * TESTS: `==` vs `.equals()` method
+  * Ans: 2 objects; a = true; b = true; c = false; d = true; e = true; f = true
+
+```java
+String s1 = "hello";
+String s2 = "hello";
+String s3 = new String("hello");
+
+System.out.println(s1 == s2);       // a
+System.out.println(s1.equals(s2));  // b
+System.out.println(s1 == s3);       // c
+System.out.println(s1.equals(s3));  // d
+```
+
+* Is this an example of method overloading or overriding? Also, refactor this class. BONUS: use varargs
+  * TESTS: POLYMORPHISM, VARARGS
+
+```java
+public class FlexiblePrinter {
+  public void printSingleString(String s) {
+    System.out.println(s);
+  }
+  public void printTwoStrings(String s1, String s2) {
+    System.out.println(s1);
+    System.out.println(s2);
+  }
+  public void printThreeStrings(String s1, String s2, String s3) {
+    System.out.println(s1);
+    System.out.println(s2);
+    System.out.println(s3);
+  }
+}
+```
+
+* Instantiate this class using the constructor
+  * TESTS: CONSTRUCTOR
+
+```java
+public class Car {
+  String make;
+  Engine engine = new Engine();
+  public void start() {
+    engine.turnOn();
+  }
+  public Car(String make) {
+    this.make = make; 
+  }
+```
+* In the above code, can we use a no-args constructor? If not, add one.
+* BONUS: modify the above code to use dependency injection
+* Using the above code as reference, predict the output.
+
+```java
+Car ford = new Car("Focus");
+Car toyota = new Car("Camry");
+Car anotherFord = new Car("Focus");
+System.out.println(ford == toyota);
+System.out.println(ford.equals(toyota));
+System.out.println(ford == anotherFord);
+System.out.println(ford.equals(anotherFord));
+```
+
+* Change the Car class so that the last line in the above code print "true"?
+  * Ans: override the `.equals` method
+
+* Predict the output of this code
+  * TESTS: MAIN METHOD
+
+```java
+public class Program {
+   public static void main(String[] args) {
+     System.out.println(args[1]);
+   }
+}
+```
+```bash
+# command line:
+javac Program.java
+java Program foo bar baz
+```
+
+* Consider the following example. What gets printed on lines A-D? Is this method overloading or overriding?
+  * TESTS: POLYMORPHISM
+  * A prints "WOOF!"; B prints "WOOF!"; C prints "HELLO"; D is not allowed
+
+```java
+public class Animal {
+  public void speak() {System.out.println("HELLO");}
+}
+public class Dog extends Animal {
+  public void speak() {System.out.println("WOOF!");}
+}
+public class Driver {
+  public static void main(String[] args) {
+    Animal dog1 = new Dog();
+    dog1.speak();  // A
+    Dog dog2 = new Dog();
+    dog2.speak();  // B
+    Animal animal1 = new Animal();
+    animal1.speak(); // C
+    Dog animal2 = new Animal();
+    animal2.speak();  // D
+  }
+}
+```
