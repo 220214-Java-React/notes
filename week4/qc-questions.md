@@ -36,8 +36,6 @@
 
 21. What is the difference between scalar and aggregate functions? Give examples of each
 
-22.
-
 ### JDBC Questions
 
 1. What is JDBC?
