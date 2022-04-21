@@ -33,9 +33,6 @@ b.	Understand the daily stand-up mechanism, retrospective meetings, user story p
 a.	Understanding Microservices architecture in comparison with the traditional architecture. 
 b.	High level overview of Debugging, load-balancing, orchestration, auto-scaling, containerization, discovery in context to microservices etc. 
 
-5.	Security, authorization and authentication specifics (to be including in the next curriculum update. Not applicable for cohorts graduating in the near future)
-a.	Focus on OAuth and Spring security with emphasis on authorization and authentication. 
-
 
 ## Common Interview Questions (April 2022)
 ### Java
